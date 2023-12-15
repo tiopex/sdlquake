@@ -2,7 +2,7 @@
 PROGRAM = sdlquake.dge
 
 # Compiler
-CHAINPREFIX=/opt/bittboy-toolchain
+CHAINPREFIX=/opt/miyoo
 CROSS_COMPILE=$(CHAINPREFIX)/usr/bin/arm-linux-
 CC = $(CROSS_COMPILE)gcc
 CXX = $(CROSS_COMPILE)g++
@@ -17,7 +17,7 @@ TYR_VERSION := $(if $(TYR_GIT),$(TYR_GIT),$(TYR_RELEASE))
 TYR_VERSION_NUM ?= $(patsubst v%,%,$(TYR_VERSION))
 
 # Linker
-LDFLAGS = -nodefaultlibs -lc -lgcc -lm -lSDL -lasound -flto -no-pie -s -Wl,--as-needed -Wl,--gc-sections
+LDFLAGS = -nodefaultlibs -lc -lgcc -lm -lSDL -lasound -flto -no-pie -s -Wl,--as-needed -Wl,--gc-sections -L$(SYSROOT)/usr/lib/ts -lts
 CFLAGS 	= -Os -fdata-sections -ffunction-sections -fno-PIC -flto -fsingle-precision-constant -fno-common -DDINGUX
 CFLAGS	+= -DNQ_HACK -DNDEBUG -DELF -DTYR_VERSION=$(TYR_VERSION_NUM) -DQBASEDIR="."
 
